@@ -20,7 +20,11 @@ var createSprockets = function(config) {
             sc.appendPath(config.basePath + '/' + sprocketsPath[i]);
         }
     }
-    sc.appendExtensions(".ejs");
+
+    var sprocketsExtensions = [".ejs"].concat(config.sprocketsExtensions || []);
+    for (var i = 0, len = sprocketsExtensions.length; i < len; i++){
+        sc.appendExtensions(sprocketsExtensions[i]);
+    }
 
     for (var i = config.sprocketsBundles.length -1; i >=0; i--) {
         var expanded = sc.depChain(config.sprocketsBundles[i]);
